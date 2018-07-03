@@ -36,9 +36,7 @@ public class HomeController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(Model model) throws ClassNotFoundException, SQLException {
 		
-		ConnectionMaker cm = new NUserDAO();
-		
-		UserDAO dao = new UserDAO(cm);
+		UserDAO dao = new DAOFactory().userDao();
 		
 		return "home";
 	}
