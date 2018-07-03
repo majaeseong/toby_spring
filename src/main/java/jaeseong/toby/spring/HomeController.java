@@ -15,20 +15,20 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) throws ClassNotFoundException, SQLException {
 		
-		UserDAO dao = new UserDAO();
-		
-		User user = new User();
-		user.setId("himan");
-		user.setName("jaeseong");
-		user.setPassword("himan2");
-		
-		dao.add(user);
-		
-		model.addAttribute("first", user.getId()+" add Success");
-		
-		User user2=dao.get(user.getId());
-		
-		model.addAttribute("second", user2);
+//		UserDAO dao = new UserDAO();
+//		
+//		User user = new User();
+//		user.setId("himan");
+//		user.setName("jaeseong");
+//		user.setPassword("himan2");
+//		
+//		dao.add(user);
+//		
+//		model.addAttribute("first", user.getId()+" add Success");
+//		
+//		User user2=dao.get(user.getId());
+//		
+//		model.addAttribute("second", user2);
 		
 		return "home";
 	}

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAO {
+public abstract class UserDAO {
 	
 	public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -45,12 +45,29 @@ public class UserDAO {
 		return user;
 	}
 	
+	public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
+	
+
+}
+
+class NUserDAO extends UserDAO{
+
+	@Override
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/toby?serverTimezone=UTC", "root", "hecim1d8");
 		
 		return c;
 	}
-	
+
+}
+
+class DUserDAO extends UserDAO{
+
+	@Override
+	public Connection getConnection() throws ClassNotFoundException, SQLException {
+		
+		return null;
+	}
 
 }
