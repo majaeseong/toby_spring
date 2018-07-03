@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) throws ClassNotFoundException, SQLException {
+	public String home(Model model){
 		
 //		UserDAO dao = new DAOFactory().userDao();
 //		
@@ -35,6 +35,27 @@ public class HomeController {
 		ApplicationContext context=
 				new AnnotationConfigApplicationContext(DAOFactory.class);
 		UserDAO dao = context.getBean("userDao", UserDAO.class);
+		
+		return "home";
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(Model model) throws ClassNotFoundException, SQLException{
+		DAOFactory f = new DAOFactory();
+		
+		UserDAO d1 = f.userDao();
+		UserDAO d2 = f.userDao();
+		
+		System.out.println("d1 : "+d1);
+		System.out.println("d2 : "+d2);
+		
+		ApplicationContext context=
+				new AnnotationConfigApplicationContext(DAOFactory.class);
+		UserDAO d3 = context.getBean("userDao", UserDAO.class);
+		UserDAO d4 = context.getBean("userDao", UserDAO.class);
+		
+		System.out.println("d3 : "+d3);
+		System.out.println("d4 : "+d4);
 		
 		return "home";
 	}
