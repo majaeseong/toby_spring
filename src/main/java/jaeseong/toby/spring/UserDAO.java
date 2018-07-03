@@ -5,16 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class UserDAO {
+public class UserDAO {
 	
 	//private SimpleConnectionMaker scm;
 	private ConnectionMaker cm;
 	
-	public UserDAO() {
+	public UserDAO(ConnectionMaker cm) {
 		//scm = new SimpleConnectionMaker();
 		//Connection c = scm.makeNewConnection();
 				
-		cm = new NUserDAO();
+		this.cm = cm;
 	}
 	public void add(User user) throws ClassNotFoundException, SQLException {
 
