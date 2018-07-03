@@ -1,16 +1,18 @@
 package jaeseong.toby.spring;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class UserDAO {
 	
+	private SimpleConnectionMaker scm;
+	
 	public void add(User user) throws ClassNotFoundException, SQLException {
 
-		Connection c = getConnection();
+		scm = new SimpleConnectionMaker();
+		Connection c = scm.makeNewConnection();
 		
 		PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
 		ps.setString(1, user.getId());
@@ -25,7 +27,8 @@ public abstract class UserDAO {
 	
 	public User get(String id) throws ClassNotFoundException, SQLException {
 
-		Connection c = getConnection();
+		scm = new SimpleConnectionMaker();
+		Connection c = scm.makeNewConnection();
 		
 		PreparedStatement ps = c.prepareStatement("select * from users where id=?");
 		ps.setString(1, id);
@@ -44,30 +47,6 @@ public abstract class UserDAO {
 		
 		return user;
 	}
-	
-	public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
-	
 
-}
-
-class NUserDAO extends UserDAO{
-
-	@Override
-	public Connection getConnection() throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/toby?serverTimezone=UTC", "root", "hecim1d8");
-		
-		return c;
-	}
-
-}
-
-class DUserDAO extends UserDAO{
-
-	@Override
-	public Connection getConnection() throws ClassNotFoundException, SQLException {
-		
-		return null;
-	}
 
 }
