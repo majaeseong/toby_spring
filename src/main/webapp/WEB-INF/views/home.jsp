@@ -9,6 +9,8 @@
 	Hello world!  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+first ${first }
+<br>
+second ${second.name }, ${second.id }, ${second.password }
 </body>
 </html>
