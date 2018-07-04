@@ -8,7 +8,9 @@ public class DAOFactory {
 	
 	@Bean
 	public UserDAO userDao() {
-		return new UserDAO(connectionMaker());
+		UserDAO dao = new UserDAO();
+		dao.setConnectionMaker(connectionMaker());
+		return dao;
 	}
 	
 	// if we have many dao, we divide method.
