@@ -8,14 +8,19 @@ import java.sql.SQLException;
 public class UserDAO {
 	
 	//private SimpleConnectionMaker scm;
-	private ConnectionMaker cm;
+	private ConnectionMaker cm;	//readonly
 	
-	public UserDAO(ConnectionMaker cm) {
-		//scm = new SimpleConnectionMaker();
-		//Connection c = scm.makeNewConnection();
-				
+//	public UserDAO(ConnectionMaker cm) {
+//		//scm = new SimpleConnectionMaker();
+//		//Connection c = scm.makeNewConnection();
+//				
+//		this.cm = cm;
+//	}
+	
+	public void setConnectionMaker(ConnectionMaker cm) {
 		this.cm = cm;
 	}
+	
 	public void add(User user) throws ClassNotFoundException, SQLException {
 
 		Connection c = cm.makeConnection();
